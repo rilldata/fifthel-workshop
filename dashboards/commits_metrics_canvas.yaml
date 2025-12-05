@@ -1,0 +1,51 @@
+# Canvas Dashboard YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/canvas-dashboards
+
+type: canvas
+display_name: Commits Metrics Dashboard
+defaults:
+  time_range: P7D
+  comparison_mode: time
+
+rows:
+  - height: 240px
+    items:
+      - width: 12
+        kpi_grid:
+          comparison:
+            - percent_change
+            - delta
+            - previous
+          measures:
+            - total_commits_measure
+            - total_files_added_measure
+            - total_files_deleted_measure
+            - total_files_renamed_measure
+          metrics_view: commits_metrics
+  - height: 400px
+    items:
+      - width: 6
+        leaderboard:
+          dimensions:
+            - org
+          measures:
+            - total_commits_measure
+          metrics_view: commits_metrics
+          num_rows: 7
+      - width: 6
+        stacked_bar:
+          color:
+            field: org
+            limit: 10
+            type: nominal
+          metrics_view: commits_metrics
+          title: Total Commits Measure over time
+          x:
+            field: time
+            limit: 10
+            showNull: true
+            type: temporal
+          "y":
+            field: total_commits_measure
+            type: quantitative
+            zeroBasedOrigin: true

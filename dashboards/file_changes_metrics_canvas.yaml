@@ -1,0 +1,106 @@
+# Canvas Dashboard YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/canvas-dashboards
+# This file was generated using AI.
+
+type: canvas
+display_name: File Changes Activity Dashboard
+defaults:
+  time_range: P7D
+  comparison_mode: time
+
+rows:
+  - height: 180px
+    items:
+      - width: 12
+        markdown:
+          alignment:
+            horizontal: left
+            vertical: top
+          content: |
+            ## File Changes Activity Overview
+
+            This dashboard provides insights into file change activity, author contributions, and codebase evolution over time. Use this dashboard to monitor code churn, identify top contributors, and analyze file-level change patterns.
+
+            ---
+  - height: 240px
+    items:
+      - width: 12
+        kpi_grid:
+          comparison:
+            - percent_change
+            - delta
+            - previous
+          measures:
+            - total_file_changes_measure
+            - unique_authors_measure
+            - total_additions_measure
+            - total_deletions_measure
+          metrics_view: file_changes_metrics
+  - height: 400px
+    items:
+      - width: 6
+        leaderboard:
+          dimensions:
+            - author
+          measures:
+            - total_file_changes_measure
+          metrics_view: file_changes_metrics
+          num_rows: 10
+      - width: 6
+        line_chart:
+          color: primary
+          metrics_view: file_changes_metrics
+          title: File Changes Over Time
+          x:
+            field: time
+            type: temporal
+          "y":
+            field: total_file_changes_measure
+            type: quantitative
+            zeroBasedOrigin: true
+  - height: 400px
+    items:
+      - width: 4
+        bar_chart:
+          color: secondary
+          metrics_view: file_changes_metrics
+          title: Top Files by Total Changes
+          x:
+            field: filename
+            limit: 10
+            showNull: true
+            sort: -y
+            type: nominal
+          "y":
+            field: total_changes_measure
+            type: quantitative
+            zeroBasedOrigin: true
+      - width: 4
+        donut_chart:
+          color:
+            field: file_extension
+            limit: 8
+            type: nominal
+          innerRadius: 50
+          measure:
+            field: total_file_changes_measure
+            showTotal: true
+            type: quantitative
+          metrics_view: file_changes_metrics
+          title: File Changes by Extension
+      - width: 4
+        area_chart:
+          color:
+            field: author
+            limit: 3
+            type: nominal
+          metrics_view: file_changes_metrics
+          title: Top Authors' File Changes Over Time
+          x:
+            field: time
+            limit: 20
+            type: temporal
+          "y":
+            field: total_file_changes_measure
+            type: quantitative
+            zeroBasedOrigin: true

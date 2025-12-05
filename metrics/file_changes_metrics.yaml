@@ -1,0 +1,103 @@
+# Metrics view YAML
+# Reference documentation: https://docs.rilldata.com/reference/project-files/metrics-views
+# This file was generated using AI.
+
+version: 1
+type: metrics_view 
+
+display_name: File Changes Metrics
+model: file_changes
+timeseries: time
+
+dimensions:
+  - name: time
+    display_name: Time
+    column: time
+  - name: hash
+    display_name: Hash
+    column: hash
+  - name: message
+    display_name: Message
+    column: message
+  - name: author
+    display_name: Author
+    column: author
+  - name: is_merge_commit
+    display_name: Is Merge Commit
+    column: is_merge_commit
+  - name: new_path
+    display_name: New Path
+    column: new_path
+  - name: file_path
+    display_name: File Path
+    column: file_path
+  - name: filename
+    display_name: Filename
+    column: filename
+  - name: file_extension
+    display_name: File Extension
+    column: file_extension
+  - name: first_directory
+    display_name: First Directory
+    column: first_directory
+  - name: second_directory
+    display_name: Second Directory
+    column: second_directory
+  - name: second_directory_concat
+    display_name: Second Directory Concat
+    column: second_directory_concat
+  - name: previous_file_path
+    display_name: Previous File Path
+    column: previous_file_path
+
+measures:
+  - name: total_file_changes_measure
+    display_name: Total File Changes
+    expression: COUNT(*)
+    description: Total number of file change records.
+    format_preset: humanize
+  - name: unique_authors_measure
+    display_name: Unique Authors
+    expression: COUNT(DISTINCT author)
+    description: Number of distinct authors who made file changes.
+    format_preset: humanize
+  - name: total_additions_measure
+    display_name: Total Additions
+    expression: SUM(additions)
+    description: Total number of lines added across all file changes.
+    format_preset: humanize
+  - name: total_deletions_measure
+    display_name: Total Deletions
+    expression: SUM(deletions)
+    description: Total number of lines deleted across all file changes.
+    format_preset: humanize
+  - name: total_changes_measure
+    display_name: Total Changes
+    expression: SUM(changes)
+    description: Total number of lines changed across all file changes.
+    format_preset: humanize
+  - name: average_additions_per_change_measure
+    display_name: Average Additions per Change
+    expression: AVG(additions)
+    description: Average number of lines added per file change.
+    format_preset: humanize
+  - name: average_deletions_per_change_measure
+    display_name: Average Deletions per Change
+    expression: AVG(deletions)
+    description: Average number of lines deleted per file change.
+    format_preset: humanize
+  - name: max_additions_in_a_change_measure
+    display_name: Max Additions in a Change
+    expression: MAX(additions)
+    description: Maximum number of lines added in a single file change.
+    format_preset: humanize
+  - name: max_deletions_in_a_change_measure
+    display_name: Max Deletions in a Change
+    expression: MAX(deletions)
+    description: Maximum number of lines deleted in a single file change.
+    format_preset: humanize
+  - name: merge_commit_count_measure
+    display_name: Merge Commit Count
+    expression: SUM(CAST(is_merge_commit AS INTEGER))
+    description: Total number of merge commits.
+    format_preset: humanize

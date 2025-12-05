@@ -1,0 +1,88 @@
+version: 1
+type: metrics_view
+
+display_name: Commits Metrics
+model: commits
+timeseries: time
+
+dimensions:
+  - name: org
+    display_name: Org
+    column: org
+  - name: repo
+    display_name: Repo
+    column: repo
+  - name: author
+    display_name: Author
+    column: author
+  - name: time
+    display_name: Time
+    column: time
+  - name: message
+    display_name: Message
+    column: message
+  - name: merge
+    display_name: Merge
+    column: merge
+  - name: commit_uri
+    display_name: Commit URI
+    expression: CONCAT('https://github.com/', org, '/', repo, '/commit/', hash)
+    uri: CONCAT('https://github.com/', org, '/', repo, '/commit/', hash)
+    description: GitHub commit URI constructed from org, repo, and hash columns.
+
+measures:
+  - name: total_commits_measure
+    display_name: Total Commits
+    expression: COUNT(hash)
+    description: Total number of commits in the repository.
+    format_preset: humanize
+  - name: total_files_added_measure
+    display_name: Total Files Added
+    expression: SUM(files_added)
+    description: Total number of files added across all commits.
+    format_preset: humanize
+  - name: total_files_deleted_measure
+    display_name: Total Files Deleted
+    expression: SUM(files_deleted)
+    description: Total number of files deleted across all commits.
+    format_preset: humanize
+  - name: total_files_renamed_measure
+    display_name: Total Files Renamed
+    expression: SUM(files_renamed)
+    description: Total number of files renamed across all commits.
+    format_preset: humanize
+  - name: total_files_modified_measure
+    display_name: Total Files Modified
+    expression: SUM(files_modified)
+    description: Total number of files modified across all commits.
+    format_preset: humanize
+  - name: average_lines_added_measure
+    display_name: Average Lines Added per Commit
+    expression: AVG(lines_added)
+    description: Average number of lines added per commit.
+    format_preset: humanize
+  - name: average_lines_deleted_measure
+    display_name: Average Lines Deleted per Commit
+    expression: AVG(lines_deleted)
+    description: Average number of lines deleted per commit.
+    format_preset: humanize
+  - name: max_files_added_measure
+    display_name: Maximum Files Added in a Commit
+    expression: MAX(files_added)
+    description: Maximum number of files added in a single commit.
+    format_preset: humanize
+  - name: total_hunks_added_measure
+    display_name: Total Hunks Added
+    expression: SUM(hunks_added)
+    description: Total number of hunks added across all commits.
+    format_preset: humanize
+  - name: total_hunks_changed_measure
+    display_name: Total Hunks Changed
+    expression: SUM(hunks_changed)
+    description: Total number of hunks changed across all commits.
+    format_preset: humanize
+  - name: number_of_committers
+    display_name: Number of Committers
+    expression: COUNT(DISTINCT author)
+    description: Number of unique commit authors in the selected period.
+    format_preset: humanize
