@@ -11,7 +11,7 @@
    
    Start Rill:
    ```bash
-   rill start <project_name>
+   rill start rill-git-analytics
    ```
 
 2. Rill opens in your browser. Click on **Start with an empty project** 
