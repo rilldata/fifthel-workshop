@@ -14,7 +14,9 @@
    rill start <project_name>
    ```
 
-2. Enable AI Features in Rill Developer (Beta)
+2. Rill opens in your browser. Click on **Start with an empty project** 
+
+3. Enable AI Features in Rill Developer (Beta)
    
    Add the following to `rill.yaml`:
 
@@ -23,7 +25,8 @@
         developerChat: true
         generateCanvas: true
     ```
-3. **Add Data** → Select **Google Cloud Storage** → Skip credentials part (It's a public source)
+
+4. **Add -> Data** (Top left) → Select **Google Cloud Storage** → Skip credentials part (It's a public source)
    
    Location:
    ```
