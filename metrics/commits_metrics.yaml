@@ -86,3 +86,8 @@ measures:
     expression: COUNT(DISTINCT author)
     description: Number of unique commit authors in the selected period.
     format_preset: humanize
+  - name: total_line_changes
+    display_name: Total Line Changes
+    expression: SUM(lines_added) + SUM(lines_deleted)
+    description: Total lines changed as sum of lines added and deleted across all commits.
+    format_preset: humanize
