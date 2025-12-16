@@ -1,12 +1,12 @@
 {
   "name": "Rill Developer",
-  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "image": "mcr.microsoft.com/devcontainers/base:debian",
   "features": {
     "ghcr.io/devcontainers/features/node:1": {
       "version": "lts"
     }
   },
-  "postCreateCommand": "curl https://rill.sh | sh -s -- --non-interactive ~/.rill",
+  "postCreateCommand": "curl https://rill.sh | sh -s -- --non-interactive ~/rill",
   "postStartCommand": "~/.rill start --no-open",
   "forwardPorts": [9009],
   "portsAttributes": {
